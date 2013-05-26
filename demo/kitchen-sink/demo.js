@@ -565,7 +565,7 @@ ace.commands.bindKey("Tab", function(editor) {
 function configTsSession(session) {
     var fn = function() {
         if(session.getMode().$id == 'ace/mode/typescript') {
-            session.setOption("typescriptLibs", ["/typescript/lib.d.ts"]);
+            session.setOption("typescriptLibs", ["/ace/typescript/lib.d.ts"]);
         }
     };
     session.on('changeMode', fn);
