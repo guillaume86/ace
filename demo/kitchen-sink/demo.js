@@ -142,7 +142,7 @@ env.editor.commands.addCommands([{
     readOnly: true
 }, {
     name: "nextFile",
-    bindKey: "Ctrl-tab",
+    bindKey: "Ctrl-tab|Ctrl-m",
     exec: function(editor) { doclist.cycleOpen(editor, 1); },
     readOnly: true
 }, {
@@ -557,10 +557,32 @@ ace.commands.bindKey("Tab", function(editor) {
     var success = snippetManager.expandWithTab(editor);
     if (!success)
         editor.execCommand("indent");
-})
+});
 
 
 
+// Setup typescript libs (must wait for the mode to be loaded because it defines the option)
+function configTsSession(session) {
+    var fn = function() {
+        if(session.getMode().$id == 'ace/mode/typescript') {
+            session.setOption("typescriptLibs", ["/typescript/lib.d.ts"]);
+        }
+    };
+    session.on('changeMode', fn);
+};
+
+env.split.forEach(function(editor) {
+    configTsSession(editor.session);
+});
+
+var origSetSession = env.split.setSession.bind(env.split);
+env.split.setSession = function(session, idx) {
+    session = origSetSession(session, idx);
+    configTsSession(session);
+    return session;
+};
+
+// Start ext-typescript
 var TypescriptEditor = require("ace/ext/typescript");
 env.editor.setOption("enableTypescript", true);
 
