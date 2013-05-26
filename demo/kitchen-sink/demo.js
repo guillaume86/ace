@@ -559,4 +559,10 @@ ace.commands.bindKey("Tab", function(editor) {
         editor.execCommand("indent");
 })
 
+
+
+var TypescriptEditor = require("ace/ext/typescript");
+env.editor.setOption("enableTypescript", true);
+
+
 });
