@@ -1,6 +1,7 @@
-.typescript-ref{
+.typescript-ref {
     position: absolute;
-    border:1px solid white;
+    border:1px solid #ffd800;
+    background: rgba(255, 216, 0, 0.2);
     opacity:0.7;
 }
 

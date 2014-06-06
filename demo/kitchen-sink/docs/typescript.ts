@@ -1,41 +1,7 @@
-class Greeter {
-	greeting: string;
-	constructor (message: string) {
-		this.greeting = message;
-	}
-	greet() {
-		return "Hello, " + this.greeting;
-	}
-}   
-
-var greeter = new Greeter("world");
-
-var button = document.createElement('button')
-button.innerText = "Say Hello"
-button.onclick = function() {
-	alert(greeter.greet())
-}
-
-document.body.appendChild(button)
-
-class Snake extends Animal {
-   move() {
-       alert("Slithering...");
-       super(5);
-   }
-}
-
-class Horse extends Animal {
-   move() {
-       alert("Galloping...");
-       super.move(45);
-   }
-}
-
 module Sayings {
     export class Greeter {
         greeting: string;
-        constructor (message: string) {
+        constructor(message: string) {
             this.greeting = message;
         }
         greet() {
@@ -43,30 +9,51 @@ module Sayings {
         }
     }
 }
-module Mankala {
-   export class Features {
-       public turnContinues = false;
-       public seedStoredCount = 0;
-       public capturedCount = 0;
-       public spaceCaptured = NoSpace;
+var greeter = new Sayings.Greeter("world");
 
-       public clear() {
-           this.turnContinues = false;
-           this.seedStoredCount = 0;
-           this.capturedCount = 0;
-           this.spaceCaptured = NoSpace;
-       }
+var button = document.createElement('button');
+button.textContent = "Say Hello";
+button.onclick = function () {
+    alert(greeter.greet());
+};
 
-       public toString() {
-           var stringBuilder = "";
-           if (this.turnContinues) {
-               stringBuilder += " turn continues,";
-           }
-           stringBuilder += " stores " + this.seedStoredCount;
-           if (this.capturedCount > 0) {
-               stringBuilder += " captures " + this.capturedCount + " from space " + this.spaceCaptured;
-           }
-           return stringBuilder;
-       }
-   }
+document.body.appendChild(button);
+
+
+class Animal {
+    constructor(public name: string) { }
+    move(meters: number) {
+        alert(this.name + " moved " + meters + "m.");
+    }
 }
+
+class Snake extends Animal {
+    constructor(name: string) { super(name); }
+    move() {
+        alert("Slithering...");
+        super.move(5);
+    }
+}
+
+class Horse extends Animal {
+    constructor(name: string) { super(name); }
+    move() {
+        alert("Galloping...");
+        super.move(45);
+    }
+}
+
+var sam = new Snake("Sammy the Python");
+var tom: Animal = new Horse("Tommy the Palomino");
+
+sam.move();
+tom.move(34);
+
+
+interface ITest {
+    overload(name: string);
+    overload(numb: number);
+}
+
+declare var x: ITest;
+x.overload();
